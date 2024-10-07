@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script>
+        let inputSeleccionado = 'num1';
+
+        function calcular() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const operacion = parseInt(document.getElementById("operacion").value);
+            let resultado;
+
+            if (operacion === 1) {
+                resultado = num1 + num2;
+            } else if (operacion === 2) {
+                resultado = num1 - num2;
+            } else if (operacion === 3) {
+                resultado = num1 * num2;
+            } else if (operacion === 4) {
+                if (num2 !== 0) {
+                    resultado = num1 / num2;
+                } else {
+                    alert("Error: División por cero no permitida.");
+                    return;
+                }
+            } else if (operacion === 5) {
+                resultado = Math.pow(num1, num2);
+            } else {
+                alert("Operación no válida. Por favor, seleccione una opción entre 1 y 5.");
+                return;
+            }
+
+            document.getElementById("resultado").innerText = `El resultado es: ${resultado}`;
+        }
+
+        function agregarNumero(numero) {
+            const input = document.getElementById(inputSeleccionado);
+            input.value += numero;
+        }
+
+        function seleccionarInput(id) {
+            inputSeleccionado = id;
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #624E88;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            background-color: #8967B3;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(1, 1, 1, 0.5);
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+            width: 100%;
+        }
+
+        .contenedor {
+            display: flex;
+            background-color: #CB80AB;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(1, 1, 1, 0.5);
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sub-contenedor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .h3, .resultado {
+            background-color: #8967B3;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(1, 1, 1, 0.2);
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .resultado {
+            background-color: #E6D9A2;
+            color: black;
+        }
+
+        .botonera {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .botonera button {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            border: none;
+            background-color: #8967B3;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .botonera button:hover {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <h1>CALCULADORA</h1>
+        <div class="contenedor">
+            <!-- Sección de la calculadora -->
+            <div class="sub-contenedor">
+                <div class="h3">
+                    <form onsubmit="event.preventDefault(); calcular();">
+                        <h3><label for="num1">Inserte número 1:</label></h3>
+                        <input type="number" id="num1" onclick="seleccionarInput('num1')" required><br><br>
+                        <h3><label for="num2">Ingrese número 2:</label></h3>
+                        <input type="number" id="num2" onclick="seleccionarInput('num2')" required><br><br>
+                        <h3><label for="operacion">Seleccione la operación:</label></h3>
+                        <select id="operacion" required>
+                            <option value="1">Sumar</option>
+                            <option value="2">Restar</option>
+                            <option value="3">Multiplicar</option>
+                            <option value="4">Dividir</option>
+                            <option value="5">Potenciación</option>
+                        </select><br><br>
+                        <button type="submit">Calcular</button>
+                    </form>
+                </div>
+                <div class="resultado">
+                    <p id="resultado"></p>
+                </div>
+            </div>
+
+            <!-- Sección del teclado numérico -->
+            <div class="botonera">
+                <button onclick="agregarNumero('1')">1</button>
+                <button onclick="agregarNumero('2')">2</button>
+                <button onclick="agregarNumero('3')">3</button>
+                <button onclick="agregarNumero('4')">4</button>
+                <button onclick="agregarNumero('5')">5</button>
+                <button onclick="agregarNumero('6')">6</button>
+                <button onclick="agregarNumero('7')">7</button>
+                <button onclick="agregarNumero('8')">8</button>
+                <button onclick="agregarNumero('9')">9</button>
+                <button onclick="agregarNumero('0')">0</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
